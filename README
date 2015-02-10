@@ -1,0 +1,31 @@
+This mod displays a map of the entire minetest world with a location arrow and direction. Or if you wish, you can now place a map voxel/block with the world map on it (but the aspect ratio may not be correct).
+I've borrowed from other peoples code, so Thanks to:
+MAPP: https://forum.minetest.net/viewtopic.php?f=9&t=4922&p=140013#p139891.
+VanessaE for her massive minetest colour file (I had to remove the comments as they broke the script), so maps show dramatically more features (and colours are more accurate).
+Maps are generated offline by minetestmapper-numpy.py https://forum.minetest.net/viewtopic.php?f=14&t=8730. The legacy minetestmapper https://forum.minetest.net/viewtopic.php?f=3&t=49 is not supported as I recoded the -numpy script to add text comments to the PNG.
+Not essential, but I also think MT-GitSync is great for keeping your mods uptodate https://forum.minetest.net/viewtopic.php?f=14&t=8749&hilit=gitsync
+
+USAGE:
+Install Dependancies:-
+As well as enablind the mod in minetest you will need python, numpy, and the python imaging library. Very easy in Ubuntu: in the software centre, just install python, python-numpy and python-pil or python3, python3-numpy and python3-pil.
+Generate the Map:-
+Run the MapWorlds.sh bash script from the mapit directory. This will generate maps for all your currently installed worlds, and can be re-run to update these whenever you like (if you only want to do one world, then copy the Mapstampyworld.sh script and edit it). You may need to set the file permissions to allow execution of the script (sudo chmod u+rwx MapWorlds.sh).
+In the terminal run it with:-
+cd ~/.minetest/mods/mapit
+./MapWorlds.sh
+
+Display the map:
+Select the mapit:maptool in your inventory.
+L-button (punch) to bring up the map.
+So far it doesn't have a recipe, so you'll have to use the chat command: /give mapit:maptool
+
+
+TODO:
+Create square images for the block so aspect ratio isn't skewed
+It probably won't be improved much after that, but the improvements I wish I was good enough to make are:-
+Have a button to run minetestmapper in the background to update the png, then reload.
+Zoom - Would be great if it was possible to zoom in with the mousewheel, but looks like the formspec doesn't support that, so would probably be with L/R mouse click.
+Teleport to location on the map (?middle click)
+
+Having said that, I think it is already quite a useful excellent quality map.
+Going to make a big mesh sign, but haven't yet coded it...
