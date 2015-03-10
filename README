@@ -1,31 +1,41 @@
-This mod displays a map of the entire minetest world with a location arrow and direction. Or if you wish, you can now place a map voxel/block with the world map on it (but the aspect ratio may not be correct).
-I've borrowed from other peoples code, so Thanks to:
-MAPP: https://forum.minetest.net/viewtopic.php?f=9&t=4922&p=140013#p139891.
+This mod displays a map of the entire minetest world with a location arrow and direction.
+It also enables you to teleport with the world, either by dividing the world into a 10x10 grid, or if you install the travelpoints mod, it will place these on the map.
+It can integrate with unified_Inventory, so you can access the map direct from the UI form.
+Finally it also provides a map node with the world map on it, which can be placed like any other node.
+
+Optional Dependancies:
+Travelpoints - teleport links around the minetest world https://forum.minetest.net/viewtopic.php?f=11&t=8021
+Unified Inventory:https://forum.minetest.net/viewtopic.php?f=11&t=3933&start=125
+
+I've borrowed from other peoples code, so thanks to:
+MAPP: https://forum.minetest.net/viewtopic.php?f=9&t=4922.
 VanessaE for her massive minetest colour file (I had to remove the comments as they broke the script), so maps show dramatically more features (and colours are more accurate).
 Maps are generated offline by minetestmapper-numpy.py https://forum.minetest.net/viewtopic.php?f=14&t=8730. The legacy minetestmapper https://forum.minetest.net/viewtopic.php?f=3&t=49 is not supported as I recoded the -numpy script to add text comments to the PNG.
 Not essential, but I also think MT-GitSync is great for keeping your mods uptodate https://forum.minetest.net/viewtopic.php?f=14&t=8749&hilit=gitsync
 
 USAGE:
 Install Dependancies:-
-As well as enablind the mod in minetest you will need python, numpy, and the python imaging library. Very easy in Ubuntu: in the software centre, just install python, python-numpy and python-pil or python3, python3-numpy and python3-pil.
-Generate the Map:-
-Run the MapWorlds.sh bash script from the mapit directory. This will generate maps for all your currently installed worlds, and can be re-run to update these whenever you like (if you only want to do one world, then copy the Mapstampyworld.sh script and edit it). You may need to set the file permissions to allow execution of the script (sudo chmod u+rwx MapWorlds.sh).
-In the terminal run it with:-
-cd ~/.minetest/mods/mapit
-./MapWorlds.sh
+As well as enabling the mod in minetest you will need python, numpy, and the python imaging library. Very easy in Ubuntu: in the software centre, just install python, python-numpy and python-pil or python3, python3-numpy and python3-pil.
+
+Generating map:
+Normally, the map will be automatically generated when you enter a new world. Alternatively there is a button on the maptool to manually reMap (but you will have to exit the world and re-enter to update the texture).
+It is possible to only regenerate at timed intervals (currently set up update each day, but you can set updateInterval in init.lua). However to enable this mode you'll need to install luaFileSystem. I'm not sure on Windows, but on linux it's:
+sudo luarocks install luafilesystem
+sudo apt-get install luarocks
 
 Display the map:
 Select the mapit:maptool in your inventory.
 L-button (punch) to bring up the map.
-So far it doesn't have a recipe, so you'll have to use the chat command: /give mapit:maptool
+So far it doesn't have a recipe, so you'll have to use creative mode, or the chat command: /give mapit:maptool
 
+On the right of the form are buttons for zoom in/out (not working), reMap (as above), and teleport and travelpoints (if you have installed that mod).
+With the teleport grid ground level is generally accurately identified. There used to be a bug meaning you might end up inside a node in which case if you teleport repeatedly to the same spot and as minetest loads blocks near your location, ultimately the surface will be reached (This doesn't seem to have occurred since a rewrite using voxelmanip).
+With travelpoints, you can either click on the number location on the map (maximum of 50), or on the buttons on the right (max of approx 20 depending on form size).
 
 TODO:
-Create square images for the block so aspect ratio isn't skewed
-It probably won't be improved much after that, but the improvements I wish I was good enough to make are:-
-Have a button to run minetestmapper in the background to update the png, then reload.
-Zoom - Would be great if it was possible to zoom in with the mousewheel, but looks like the formspec doesn't support that, so would probably be with L/R mouse click.
-Teleport to location on the map (?middle click)
+It probably won't be improved much from now, but the improvements I might (or wish I could) make are:-
+*Zoom In and Out on the map - Would be great if it was possible to zoom in with the mousewheel, but looks like the formspec doesn't support that.
+*Make a big mesh billboard...
 
-Having said that, I think it is already quite a useful excellent quality map.
-Going to make a big mesh sign, but haven't yet coded it...
+
+Having said that, I think it is already quite a useful excellent quality map. 
