@@ -33,11 +33,9 @@ import itertools
 from PIL import Image, ImageDraw, ImageFont, ImageColor
 
 try:
-    import io
-    BytesIO = io.BytesIO
+    from cStringIO import StringIO as BytesIO
 except:
-    import cStringIO
-    BytesIO = cStringIO.StringIO
+    from io import BytesIO
 
 
 TRANSLATION_TABLE = {
