@@ -42,7 +42,7 @@ local updateMap = function(forceUpdate)
 
 	-- GET NAMES AND PATHS TO ENSURE CORRECT MAP IS USED
 	local worldPath = minetest.get_worldpath()
-	local worldName = string.gsub(worldPath, "(.*/)(.*)", "%2")
+	local worldName = string.gsub(worldPath, "(.*worlds.)(.*)", "%2")
 	local worldsqlName = worldPath.. "/map.sqlite"
 	if not file_exists(worldsqlName) then return 0 end
 
@@ -121,12 +121,12 @@ minetest.register_node('mapit:mapblock', {
         -- ideally would have an automatic way of creating a face for the block which was correctly dimensions and aspect ratio
         -- currently using a large .png introduces sig delay due to time drawing the faces
 	description = "Map Block",
-	tiles = { string.gsub(string.gsub(minetest.get_worldpath(), "(.*/)(.*)", "%2"),"%s+", "_").."_thumb.png",
-		  string.gsub(string.gsub(minetest.get_worldpath(), "(.*/)(.*)", "%2"),"%s+", "_").."_thumb.png",
-		  string.gsub(string.gsub(minetest.get_worldpath(), "(.*/)(.*)", "%2"),"%s+", "_").."_thumb.png",
-		  string.gsub(string.gsub(minetest.get_worldpath(), "(.*/)(.*)", "%2"),"%s+", "_").."_thumb.png",
-		  string.gsub(string.gsub(minetest.get_worldpath(), "(.*/)(.*)", "%2"),"%s+", "_").."_thumb.png",
-		  string.gsub(string.gsub(minetest.get_worldpath(), "(.*/)(.*)", "%2"),"%s+", "_").."_thumb.png",
+	tiles = { string.gsub(string.gsub(minetest.get_worldpath(), "(.*worlds.)(.*)", "%2"),"%s+", "_").."_thumb.png",
+		  string.gsub(string.gsub(minetest.get_worldpath(), "(.*worlds.)(.*)", "%2"),"%s+", "_").."_thumb.png",
+		  string.gsub(string.gsub(minetest.get_worldpath(), "(.*worlds.)(.*)", "%2"),"%s+", "_").."_thumb.png",
+		  string.gsub(string.gsub(minetest.get_worldpath(), "(.*worlds.)(.*)", "%2"),"%s+", "_").."_thumb.png",
+		  string.gsub(string.gsub(minetest.get_worldpath(), "(.*worlds.)(.*)", "%2"),"%s+", "_").."_thumb.png",
+		  string.gsub(string.gsub(minetest.get_worldpath(), "(.*worlds.)(.*)", "%2"),"%s+", "_").."_thumb.png",
 	},
 	sunlight_propagates = false,
 	paramtype = "light",
@@ -151,7 +151,7 @@ minetest.register_node('mapit:teleportWaypoint', {
 
 minetest.register_tool("mapit:maptool", {
 	description = "Map Tool",
-	inventory_image = string.gsub(string.gsub(minetest.get_worldpath(), "(.*/)(.*)", "%2"),"%s+", "_")..".png",
+	inventory_image = string.gsub(string.gsub(minetest.get_worldpath(), "(.*worlds.)(.*)", "%2"),"%s+", "_")..".png",
 	on_use = function(itemstack, user, pointed_thing)
 	map_handler_maptool(itemstack,user,pointed_thing)
 	end,
@@ -224,7 +224,7 @@ function generateMapStrings()
 
 	-- GET NAMES AND PATHS TO ENSURE CORRECT MAP IS USED
 	local worldPath = minetest.get_worldpath()
-	local worldName = string.gsub(worldPath, "(.*/)(.*)", "%2")
+	local worldName = string.gsub(worldPath, "(.*worlds.)(.*)", "%2")
 
 	local curModPath = minetest.get_modpath('mapit')
 	local mapFileName = curModPath.. "/textures/".. worldName:gsub("%s+", "_").. ".png"
@@ -1316,7 +1316,7 @@ if minetest.get_modpath("unified_inventory") then
 
 			-- GET NAMES AND PATHS TO ENSURE CORRECT MAP IS USED
 			local worldPath = minetest.get_worldpath()
-			local worldName = string.gsub(worldPath, "(.*/)(.*)", "%2")
+			local worldName = string.gsub(worldPath, "(.*worlds.)(.*)", "%2")
 
 			local mapFileName = worldName:gsub("%s+", "_").. ".png"
 			
