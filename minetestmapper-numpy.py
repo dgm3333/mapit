@@ -1030,7 +1030,7 @@ def draw_image(world,uid_to_color):
     else:
       reSize=(int(thumbSize*(float(imSize[0])/imSize[1])), thumbSize)
 
-    thumbBorder=((thumbSize-reSize[0])/2, (thumbSize-reSize[1])/2, thumbSize-(thumbSize-reSize[0])/2, thumbSize-(thumbSize-reSize[1])/2)
+    thumbBorder=(int((thumbSize-reSize[0])/2), int((thumbSize-reSize[1])/2), int(thumbSize-(thumbSize-reSize[0])/2), int(thumbSize-(thumbSize-reSize[1])/2))
     thumbIm = Image.new("RGB", (thumbSize,thumbSize), args.bgcolor)
     thumbIm.paste(im.resize(reSize),thumbBorder)
     thumbIm.save(args.output.replace(".png", "_thumb.png"), "PNG")
@@ -1052,9 +1052,15 @@ def pngsave(im, file):
     meta = PngImagePlugin.PngInfo()
 
     # copy metadata into new object
-    for k,v in im.info.iteritems():
-        if k in reserved: continue
-        meta.add_text(k, v, 0)
+    if sys.version_info > (3,0):
+        for k,v in im.info.items():
+            if k in reserved: continue
+            meta.add_text(k, v, 0)
+        pass
+    else:
+        for k,v in im.info.iteritems():
+            if k in reserved: continue
+            meta.add_text(k, v, 0)
 
     # and save
     im.save(file, "PNG", pnginfo=meta)
